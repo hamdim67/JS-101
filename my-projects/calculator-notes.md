@@ -32,3 +32,31 @@
 //so we need to change num1 and num2 to numbers
 
 //Refactoring: Change if/else to switch statement
+
+//Bonus feature #3
+//Internationalize your messages by sending the JSON configuration file
+//to translators and calling the right translation in your code
+
+//Prompt for language choice
+//Check if invalid
+//Output language
+
+//Prompt for number
+//Check if invalid
+//Output number (2X)
+
+//Prompt for operation
+//Check if it's valid
+//Run the operations
+
+//I got it to work! Finally!
+
+//My 2 mistakes
+//I put the name of the JSON object as the
+//name of the messages function a few times when I was using that function
+
+//Also, for the performOperation() function
+//I use num1 and num2 to get the value of result,
+//But I forgot to pass in num1 and num2
+//as arguments to the function,
+//so num1 and num2 were undefined, and so, result is undefined

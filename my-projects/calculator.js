@@ -1,16 +1,11 @@
-//Bonus feature #3
-//Internationalize your messages by sending the JSON configuration file
-//to translators and calling the right translation in your code
-
 const MESSAGES = require("./calculator_messages.json");
+let lang = "en";
+let num1;
+let num2;
+
 const readline = require("readline-sync");
-let lang = readline.question();
 
-//Want to ask what language they want
-//Then i want to access the language code and then
-//display the messages in that language
-
-function messages(lang = "en", message) {
+function messages(message, lang) {
   return MESSAGES[lang][message];
 }
 
@@ -18,70 +13,125 @@ function prompt(msg) {
   console.log(`=> ${msg}`);
 }
 
-let num1;
-let num2;
+function checkValidLanguage(lang) {
+  while (!["1", "2", "3"].includes(lang)) {
+    prompt(MESSAGES.invalidLang);
+    lang = readline.question();
+  }
+  return lang;
+}
 
-function invalidNumber(num) {
+function getLanguage() {
+  prompt(MESSAGES.LANGUAGE);
+  lang = readline.question();
+
+  checkValidLanguage(lang);
+
+  switch (lang) {
+    case "1":
+      lang = "en";
+      break;
+    case "2":
+      lang = "es";
+      break;
+    case "3":
+      lang = "fr";
+      break;
+  }
+}
+
+function invalidNum(num) {
   return num.trimStart() === "" || Number.isNaN(Number(num));
 }
 
-function getNumberInput() {
-  num1 = readline.question();
-  num2 = readline.question();
+function getNumberInput(whichNumber) {
+  prompt(messages(`${whichNumber}Number`, lang));
+  let num = readline.question();
+
+  while (invalidNum(num)) {
+    prompt(messages("invalidNumber", lang));
+    num = readline.question();
+  }
+
+  return Number(num);
 }
 
-while (true) {
-  prompt("What language would you like?");
+let operation;
 
-  prompt(messages("Welcome"));
-
-  prompt(messages[lang]["Welcome"]);
-
-  prompt(MESSAGES[lang]["firstNumber"]);
-
-  num1 = getNumberInput(
-    prompt(MESSAGES[lang]["firstNumber"]),
-    invalidNumber(num1)
-  );
-
-  num2 = getNumberInput(
-    prompt(MESSAGES[lang]["secondNumber"]),
-    invalidNumber(num2)
-  );
-
-  console.log(`${num1}\n${num2}`);
-
-  prompt(MESSAGES.performOperation);
-  let operation = readline.question();
+function getOperation() {
+  prompt(messages("getOperation", lang));
+  operation = readline.question();
 
   while (!["1", "2", "3", "4"].includes(operation)) {
-    prompt(MESSAGES.invalidOperation);
+    prompt(messages("invalidOperation", lang));
     operation = readline.question();
   }
 
-  let output;
+  return operation;
+}
 
-  switch (operation) {
-    case "1":
-      output = Number(num1) + Number(num2);
-      break;
-    case "2":
-      output = Number(num1) - Number(num2);
-      break;
-    case "3":
-      output = Number(num1) * Number(num2);
-      break;
-    case "4":
-      output = Number(num1) / Number(num2);
-      break;
-  }
-
-  console.log(MESSAGES.moreOperations);
-  let proceed = readline.question();
-  if (proceed === "yes" || proceed === "y") {
-    continue;
-  } else if (proceed === "no" || proceed === "n") {
-    console.log(`The result is ${output}.`);
-    break;
+function divideByZero() {
+  if (num2 === 0 || Object.is(num2, -0)) {
+    return prompt(messages("noDivideByZero", lang));
+  } else {
+    return num1 / num2;
   }
 }
+
+function performOperation() {
+  let result;
+  switch (operation) {
+    case "1":
+      result = num1 + num2;
+      break;
+    case "2":
+      result = num1 - num2;
+      break;
+    case "3":
+      result = num1 * num2;
+      break;
+    case "4":
+      result = divideByZero(num2, "4");
+      break;
+  }
+
+  //Don't forget to account for dividing by 0
+  //So check if Number(0) === 0 && operation === 4
+  //Then prompt them they can't divide by zero (divideByZero)
+
+  prompt(messages("result", lang) + " " + `${result}`);
+}
+
+let proceed;
+
+function runAgain() {
+  prompt(messages("runAgain", lang));
+  proceed = readline.question();
+
+  while (!["yes", "y", "no", "n"].includes(proceed)) {
+    prompt(messages("invalidRunAgain", lang));
+    proceed = readline.question();
+  }
+
+  return proceed;
+}
+
+do {
+  console.clear();
+  getLanguage();
+
+  prompt(messages("Welcome", lang));
+  //Why does the 'message' need to come first?
+  //I tried switching the order of the arguments and it didn't work
+
+  num1 = getNumberInput("first");
+
+  num2 = getNumberInput("second");
+
+  getOperation(operation);
+
+  performOperation(operation, num1, num2);
+
+  runAgain(proceed);
+} while (proceed === "yes" || proceed === "y");
+prompt(messages("goodbye", lang));

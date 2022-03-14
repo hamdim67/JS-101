@@ -1,29 +1,44 @@
 {
+  "LANGUAGE": "What language would you like? 1) English 2) Spanish 3) French\n",
+  "invalidLang": "Please enter valid language choice",
   "en": {
     "Welcome": "Welcome to the calculator!",
     "firstNumber": "What is the first number?\n",
     "secondNumber": "What is the second number?\n",
-    "invalidNum": "Hmm..that doesn't seem like a valid number",
-    "performOperation": "What operation would you like to perform?\n 1) Add 2) Subtract 3) Multiply 4) Divide\n",
+    "invalidNumber": "Hmm..that doesn't seem like a valid number",
+    "getOperation": "What operation would you like to perform?\n 1) Add 2) Subtract 3) Multiply 4) Divide\n",
     "invalidOperation": "Must choose 1, 2, 3, 4.",
-    "moreOperations": "Would you like to perform another operation?"
+    "noDivideByZero": "Cannot divide by zero. Please try again.",
+    "runAgain": "Would you like to perform another operation?",
+    "invalidRunAgain": "Must type yes, y, no, or n",
+    "result": "The result is:",
+    "goodbye": "Thank you for using the calculator! Goodbye."
   },
   "es": {
-    "Bienvenido": "¡Bienvenido a la calculadora!",
+    "Welcome": "¡Bienvenido a la calculadora!",
     "firstNumber": "¿Cuál es el primer número?\n",
     "secondNumber": "¿Cuál es el segundo número?\n",
-    "invalidNum": "Hmm... ese no parece ser un número válido",
-    "performOperation": "¿Qué operación te gustaría realizar?\n 1) Sumar 2) Restar 3) Multiplicar 4) Dividir\n",
+    "invalidNumber": "Hmm... ese no parece ser un número válido",
+    "getOperation": "¿Qué operación te gustaría realizar?\n 1) Sumar 2) Restar 3) Multiplicar 4) Dividir\n",
     "invalidOperation": "Debe elegir 1, 2, 3, 4.",
-    "moreOperations": "¿Desea realizar otra operación?"
+    "noDivideByZero": "No se puede dividir por cero. Inténtalo de nuevo.",
+    "runAgain": "¿Le gustaría realizar otra operación?",
+    "invalidRunAgain": "Debe escribir yes, y, no, or n",
+    "result": "El resultado es:",
+    "goodbye": "¡Gracias por usar la calculadora! Adiós."
   },
   "fr": {
-    "Bienvenue": "Bienvenue dans la calculatrice!",
+    "Welcome": "Bienvenue dans la calculatrice!",
     "firstNumber": "Quel est le premier numéro?\n",
     "secondNumber": "Quel est le deuxième nombre?\n",
-    "invalidNum": "Hmm... ça ne semble pas être un nombre valide",
-    "performOperation": "Quelle opération souhaitez-vous effectuer?\n 1) Additionner 2) Soustraire 3) Multiplier 4) Diviser\n",
+    "invalidNumber": "Hmm... ça ne semble pas être un nombre valide",
+    "getOperation": "Quelle opération souhaitez-vous effectuer?\n 1) Additionner 2) Soustraire 3) Multiplier 4) Diviser\n",
     "invalidOperation": "Vous devez choisir 1, 2, 3, 4.",
-    "moreOperations": "Voulez-vous effectuer une autre opération?"
+    "noDivideByZero": "Impossible de diviser par zéro. Veuillez réessayer.",
+    "invalidOperations": "Voulez-vous effectuer une autre opération?",
+    "runAgain": "Voulez-vous effectuer une autre opération?",
+    "invalidRunAgain": "Doit taper yes, y, no, or n",
+    "result": "Le résultat est:",
+    "goodbye": "Merci d'avoir utilisé la calculatrice ! Au revoir."
   }
 }
