@@ -1,11 +1,8 @@
 const MESSAGES = require("./calculator_messages.json");
-let lang = "en";
-let num1;
-let num2;
 
 const readline = require("readline-sync");
 
-function messages(message, lang) {
+function messages(lang = "en", message) {
   return MESSAGES[lang][message];
 }
 
@@ -18,10 +15,9 @@ function checkValidLanguage(lang) {
     prompt(MESSAGES.invalidLang);
     lang = readline.question();
   }
-  return lang;
 }
 
-function getLanguage() {
+function getLanguage(lang) {
   prompt(MESSAGES.LANGUAGE);
   lang = readline.question();
 
@@ -38,15 +34,16 @@ function getLanguage() {
       lang = "fr";
       break;
   }
+  return lang;
 }
 
 function invalidNum(num) {
   return num.trimStart() === "" || Number.isNaN(Number(num));
 }
 
-function getNumberInput(whichNumber) {
+function getNumberInput(whichNumber, num) {
   prompt(messages(`${whichNumber}Number`, lang));
-  let num = readline.question();
+  num = readline.question();
 
   while (invalidNum(num)) {
     prompt(messages("invalidNumber", lang));
@@ -56,9 +53,7 @@ function getNumberInput(whichNumber) {
   return Number(num);
 }
 
-let operation;
-
-function getOperation() {
+function getOperation(operation) {
   prompt(messages("getOperation", lang));
   operation = readline.question();
 
@@ -66,11 +61,9 @@ function getOperation() {
     prompt(messages("invalidOperation", lang));
     operation = readline.question();
   }
-
-  return operation;
 }
 
-function divideByZero() {
+function divideByZero(num1, num2) {
   if (num2 === 0 || Object.is(num2, -0)) {
     return prompt(messages("noDivideByZero", lang));
   } else {
@@ -78,7 +71,7 @@ function divideByZero() {
   }
 }
 
-function performOperation() {
+function performOperation(operation, num1, num2) {
   let result;
   switch (operation) {
     case "1":
@@ -87,47 +80,42 @@ function performOperation() {
     case "2":
       result = num1 - num2;
       break;
+      ß;
     case "3":
       result = num1 * num2;
       break;
     case "4":
-      result = divideByZero(num2, "4");
+      result = divideByZero(num1, num2, "4");
       break;
   }
 
   prompt(messages("result", lang) + " " + `${result}`);
 }
 
-let proceed;
-
 function runAgain() {
   prompt(messages("runAgain", lang));
   proceed = readline.question();
 
-  while (!["yes", "y", "no", "n"].includes(proceed)) {
+  while (!["yes", "y", "no", "n"].toLowerCase().includes(proceed)) {
     prompt(messages("invalidRunAgain", lang));
     proceed = readline.question();
   }
-
-  return proceed;
 }
 
 do {
   console.clear();
-  getLanguage();
+  let lang = getLanguage();
 
-  prompt(messages("Welcome", lang));
-  //Why does the 'message' need to come first?
-  //I tried switching the order of the arguments and it didn't work
+  prompt(messages(lang, "Welcome"));
 
-  num1 = getNumberInput("first");
+  let num1 = getNumberInput("first");
 
-  num2 = getNumberInput("second");
+  let num2 = getNumberInput("second");
 
-  getOperation(operation);
+  let operation = getOperation();
 
   performOperation(operation, num1, num2);
 
-  runAgain(proceed);
+  let proceed = runAgain();
 } while (proceed === "yes" || proceed === "y");
 prompt(messages("goodbye", lang));

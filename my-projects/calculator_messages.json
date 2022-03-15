@@ -1,5 +1,5 @@
 {
-  "LANGUAGE": "What language would you like? 1) English 2) Spanish 3) French\n",
+  "langChoice": "What language would you like? 1) English 2) Spanish 3) French\n",
   "invalidLang": "Please enter valid language choice",
   "en": {
     "Welcome": "Welcome to the calculator!",

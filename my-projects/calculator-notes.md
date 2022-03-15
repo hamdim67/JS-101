@@ -64,3 +64,11 @@
 //Don't forget to account for dividing by 0
 //So check if Number(0) === 0 && operation === 4
 //Then prompt them they can't divide by zero (divideByZero)
+
+///prompt(messages(lang, "Welcome"));
+//Why does the 'message' need to come first?
+//I tried switching the order of the arguments and it didn't work
+//B/c the arguments must always be provided to the function
+//in the order they are listed as parameters
+
+//Edit: I switched the parameters and then my original arugment set up works
