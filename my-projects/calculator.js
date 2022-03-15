@@ -98,7 +98,7 @@ function runAgain(proceed) {
   prompt(messages("runAgain", lang));
   proceed = readline.question();
 
-  while (!["yes", "y", "no", "n"].includes(proceed)) {
+  while (!["yes", "y", "no", "n"].toLowerCase().includes(proceed)) {
     prompt(messages("invalidRunAgain", lang));
     proceed = readline.question();
   }
@@ -112,18 +112,13 @@ do {
   //How can I declare 'lang' with let inside the loop and
   //it be accessible outside the do/while loop?
 
-  console.log(lang);
-
   prompt(messages("Welcome", lang));
 
   let num1 = getNumberInput("first");
-  console.log(num1);
 
   let num2 = getNumberInput("second");
-  console.log(num2);
 
   let operation = getOperation();
-  console.log(operation);
 
   performOperation(operation, num1, num2);
 
