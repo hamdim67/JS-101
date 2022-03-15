@@ -71,4 +71,6 @@
 //B/c the arguments must always be provided to the function
 //in the order they are listed as parameters
 
-//Edit: I switched the parameters and then my original arugment set up works
+//If you switch the order of the arguments in the function declaration,
+//you need to switch their order in ALL function calls to the messages()
+//function or you'll get an error

@@ -1,8 +1,9 @@
 const MESSAGES = require("./calculator_messages.json");
 
 const readline = require("readline-sync");
+let lang;
 
-function messages(lang = "en", message) {
+function messages(message, lang = "en") {
   return MESSAGES[lang][message];
 }
 
@@ -18,7 +19,7 @@ function checkValidLanguage(lang) {
 }
 
 function getLanguage(lang) {
-  prompt(MESSAGES.LANGUAGE);
+  prompt(MESSAGES.langChoice);
   lang = readline.question();
 
   checkValidLanguage(lang);
@@ -61,6 +62,7 @@ function getOperation(operation) {
     prompt(messages("invalidOperation", lang));
     operation = readline.question();
   }
+  return operation;
 }
 
 function divideByZero(num1, num2) {
@@ -80,7 +82,7 @@ function performOperation(operation, num1, num2) {
     case "2":
       result = num1 - num2;
       break;
-      ß;
+
     case "3":
       result = num1 * num2;
       break;
@@ -92,30 +94,39 @@ function performOperation(operation, num1, num2) {
   prompt(messages("result", lang) + " " + `${result}`);
 }
 
-function runAgain() {
+function runAgain(proceed) {
   prompt(messages("runAgain", lang));
   proceed = readline.question();
 
-  while (!["yes", "y", "no", "n"].toLowerCase().includes(proceed)) {
+  while (!["yes", "y", "no", "n"].includes(proceed)) {
     prompt(messages("invalidRunAgain", lang));
     proceed = readline.question();
   }
+  return proceed;
 }
 
+let proceed;
 do {
   console.clear();
-  let lang = getLanguage();
+  lang = getLanguage();
+  //How can I declare 'lang' with let inside the loop and
+  //it be accessible outside the do/while loop?
 
-  prompt(messages(lang, "Welcome"));
+  console.log(lang);
+
+  prompt(messages("Welcome", lang));
 
   let num1 = getNumberInput("first");
+  console.log(num1);
 
   let num2 = getNumberInput("second");
+  console.log(num2);
 
   let operation = getOperation();
+  console.log(operation);
 
   performOperation(operation, num1, num2);
 
-  let proceed = runAgain();
+  proceed = runAgain(proceed);
 } while (proceed === "yes" || proceed === "y");
 prompt(messages("goodbye", lang));
