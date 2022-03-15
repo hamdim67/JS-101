@@ -95,10 +95,6 @@ function performOperation() {
       break;
   }
 
-  //Don't forget to account for dividing by 0
-  //So check if Number(0) === 0 && operation === 4
-  //Then prompt them they can't divide by zero (divideByZero)
-
   prompt(messages("result", lang) + " " + `${result}`);
 }
 

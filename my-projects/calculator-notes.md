@@ -10,7 +10,7 @@
 
 //Ask user 'Would you like to perform another calculation'?
 //Wait for input
-//If input is 'yes', start new calculation using 'continue'
+//If input is 'yes', start new calculation
 //enclose entire code in while() loop to loop back to beginning
 //If input is 'no', exit out of calculator w/ 'break'
 
@@ -60,3 +60,7 @@
 //But I forgot to pass in num1 and num2
 //as arguments to the function,
 //so num1 and num2 were undefined, and so, result is undefined
+
+//Don't forget to account for dividing by 0
+//So check if Number(0) === 0 && operation === 4
+//Then prompt them they can't divide by zero (divideByZero)
