@@ -17,30 +17,30 @@ function getLoanAmount(amount) {
   return amount;
 }
 
-function getMonthlyRate(annualRate) {
+function getMonthlyRate(rate) {
   prompt(
     "What's the Annual Percentage Rate (APR)? Enter whole number or number to 2 decimal places"
   );
-  annualRate = readline.question();
+  rate = readline.question();
 
-  if (annualRate.includes("%")) {
-    annualRate = Number(annualRate.slice(0, -1));
+  if (rate.includes("%")) {
+    rate = Number(rate.slice(0, -1));
   }
 
-  annualRate = Number(annualRate / 100 / 12);
+  rate = Number(rate / 100 / 12);
 
-  return annualRate;
+  return rate;
 }
 
-function getLoanDuration(durationYears, durationMonths) {
+function getLoanDuration(years, months) {
   prompt("What is the loan duration?");
 
   prompt("Years:");
-  durationYears = Number(readline.question()) * 12;
+  years = Number(readline.question()) * 12;
   prompt("Months:");
-  durationMonths = Number(readline.question());
+  months = Number(readline.question());
 
-  return durationYears + durationMonths;
+  return years + months;
 }
 
 function getMonthlyPay(loanAmount, monthlyRate, loanMonths) {
