@@ -14,6 +14,11 @@ function getLoanAmount(amount) {
     amount = Number(amount.replaceAll(",", ""));
   }
 
+  while (isNaN(amount)) {
+    prompt("Must enter number for loan amount.");
+    amount = readline.question();
+  }
+
   return amount;
 }
 
@@ -25,6 +30,13 @@ function getMonthlyRate(rate) {
 
   if (rate.includes("%")) {
     rate = Number(rate.slice(0, -1));
+  }
+
+  while (isNaN(rate)) {
+    prompt(
+      "Must enter either a whole number or number up to 2 decimal places."
+    );
+    rate = readline.question();
   }
 
   rate = Number(rate / 100 / 12);
@@ -39,6 +51,12 @@ function getLoanDuration(years, months) {
   years = Number(readline.question()) * 12;
   prompt("Months:");
   months = Number(readline.question());
+
+  while (isNaN(years, months)) {
+    prompt("Must enter whole number for years and/or months.");
+    years = Number(readline.question());
+    months = Number(readline.question());
+  }
 
   return years + months;
 }
