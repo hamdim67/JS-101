@@ -18,3 +18,6 @@ Use the following formula
 //No interest loans
 //if APR is 0, then set monthlyRate = 0;
 //Check if loan duration is in months or years
+
+//Now cmnvert durationYears to months and add to durationMonths
+//to get loanMonths

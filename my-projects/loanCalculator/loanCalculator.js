@@ -18,7 +18,9 @@ function getLoanAmount(amount) {
 }
 
 function getMonthlyRate(annualRate) {
-  prompt("What's the Annual Percentage Rate (APR)?");
+  prompt(
+    "What's the Annual Percentage Rate (APR)? Enter whole number or number to 2 decimal places"
+  );
   annualRate = readline.question();
 
   if (annualRate.includes("%")) {
@@ -38,9 +40,6 @@ function getLoanDuration(durationYears, durationMonths) {
   prompt("Months:");
   durationMonths = Number(readline.question());
 
-  //Now cmnvert durationYears to months and add to durationMonths
-  //to get loanMonths
-
   return durationYears + durationMonths;
 }
 
@@ -56,13 +55,10 @@ function getMonthlyPay(loanAmount, monthlyRate, loanMonths) {
 }
 
 let loanAmount = getLoanAmount();
-console.log(loanAmount);
 
 let monthlyRate = getMonthlyRate();
-console.log(monthlyRate);
 
 let loanMonths = getLoanDuration();
-console.log(loanMonths);
 
 let monthlyPay = getMonthlyPay(loanAmount, monthlyRate, loanMonths);
 
