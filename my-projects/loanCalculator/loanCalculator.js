@@ -19,7 +19,7 @@ function getLoanAmount(amount) {
 
 function getMonthlyRate(rate) {
   prompt(
-    "What's the Annual Percentage Rate (APR)? Enter whole number or number to 2 decimal places"
+    "What's the Annual Percentage Rate (APR)? Enter a whole number or number up to 2 decimal places"
   );
   rate = readline.question();
 
