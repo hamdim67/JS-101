@@ -53,7 +53,7 @@ function getMonthlyRate(rate) {
 }
 
 function invalidDuration(years, months) {
-  while (isNaN(years, months) || !((years, months) > 0)) {
+  while (isNaN(years) || isNaN(months) || !((years, months) > 0)) {
     prompt("Must enter whole number for years and/or months.");
     prompt("Years:");
     years = Number(readline.question()) * 12;
