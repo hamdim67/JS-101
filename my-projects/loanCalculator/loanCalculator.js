@@ -53,14 +53,15 @@ function getMonthlyRate(rate) {
 }
 
 function invalidDuration(years, months) {
-  while (isNaN(years) || isNaN(months) || !((years, months) > 0)) {
+  while (isNaN(years) || isNaN(months) || !(years > 0) || months < 0) {
     prompt("Must enter whole number for years and/or months.");
     prompt("Years:");
     years = Number(readline.question()) * 12;
     prompt("Months:");
     months = Number(readline.question());
   }
-  console.log(years, months);
+  console.log(years);
+  console.log(months);
 }
 
 function getLoanDuration(years, months) {
