@@ -52,29 +52,22 @@ function getMonthlyRate(rate) {
   return rate;
 }
 
-function invalidDuration(years, months) {
-  while (isNaN(years) || isNaN(months) || !(years > 0) || months < 0) {
+function invalidDuration(years) {
+  while (Number.isNaN(years) || !(years > 0)) {
     prompt("Must enter whole number for years and/or months.");
     prompt("Years:");
-    years = Number(readline.question()) * 12;
-    prompt("Months:");
-    months = Number(readline.question());
+    years = Number(readline.question());
   }
-  console.log(years);
-  console.log(months);
+  return years;
 }
 
-function getLoanDuration(years, months) {
-  prompt("What is the loan duration?");
+function getLoanDuration(years) {
+  prompt("What is the loan duration (in years)?");
 
   prompt("Years:");
-  years = Number(readline.question()) * 12;
-  prompt("Months:");
-  months = Number(readline.question());
+  years = Number(readline.question());
 
-  invalidDuration(Number(years), Number(months));
-
-  return years + months;
+  return invalidDuration(years);
 }
 
 function getMonthlyPay(loanAmount, monthlyRate, loanMonths) {
@@ -94,7 +87,7 @@ let loanAmount = getLoanAmount();
 
 let monthlyRate = getMonthlyRate();
 
-let loanMonths = getLoanDuration();
+let loanMonths = getLoanDuration() * 12;
 
 let monthlyPay = getMonthlyPay(loanAmount, monthlyRate, loanMonths);
 
