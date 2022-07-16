@@ -95,51 +95,56 @@ If it is, log it to the console
 If not, skip to the next number
 
 Code
+
+for (let num = 1; num < 100; num++) {
+  if (!(num % 2 === 0)) {
+    console.log(num);
+  }
+}
+
 */
 
-// for (let num = 1; num < 100; num++) {
-//   if (!(num % 2 === 0)) {
-//     console.log(num);
-//   }
-// }
+/*
+3. Log all even numbers from 1 to 99, inclusive, to the console, with each number on a separate line.
 
-//3. Log all even numbers from 1 to 99, inclusive, to the console, with each number on a separate line.
+for (let num = 1; num < 100; num++) {
+  if (num % 2 === 0) {
+    console.log(num);
+  }
+}
 
-// for (let num = 1; num < 100; num++) {
-//   if (num % 2 === 0) {
-//     console.log(num);
-//   }
-// }
+*/
 
-//4.
+/*
+4.
 const readline = require("readline-sync");
 
-//Ask user to enter length of room in meters
-//Ask user to enter width of room in meters
+Ask user to enter length of room in meters
+Ask user to enter width of room in meters
 
-//Take both numbers and multiply thme to get square meters
-//Round answer to 2 decimal places (also convert to square feet)
+Take both numbers and multiply thme to get square meters
+Round answer to 2 decimal places (also convert to square feet)
 
-// let length = readline.question("Enter the length of the room in meters.\n");
+let length = readline.question("Enter the length of the room in meters.\n");
 
-// let width = readline.question("Enter the width of the room in meters.\n");
+let width = readline.question("Enter the width of the room in meters.\n");
 
-// let result = length * width;
-// let sqFeet = result * 10.7639;
+let result = length * width;
+let sqFeet = result * 10.7639;
 
-// console.log(
-//   `The area of the room is ${result} square meters (${sqFeet} square feet).`
-// );
+console.log(
+  `The area of the room is ${result} square meters (${sqFeet} square feet).`
+);
 
-//5. Tip Calculator
+5. Tip Calculator
 
-// let bill = Number(readline.question("What is the bill?\n"));
-// let tipPercent = Number(readline.question("What is the tip percentage?\n"));
-// let tip = (tipPercent / 100) * bill;
-// let total = tip + bill;
+let bill = Number(readline.question("What is the bill?\n"));
+let tipPercent = Number(readline.question("What is the tip percentage?\n"));
+let tip = (tipPercent / 100) * bill;
+let total = tip + bill;
 
-// console.log(`The tip is $${tip}`);
-// console.log(`The total is $${total}`);
+console.log(`The tip is $${tip}`);
+console.log(`The total is $${total}`);
 
 /*
 6. Sum or Product of Consecutive Integers
@@ -160,7 +165,6 @@ None
 Algorithm
 
 
-
 If the letter entered is 's' (case sensitive)
 have a for loop that loops through number 1 to entered number (num), inclusive,
 calculate the sum of all numbers from 1 to entered number
@@ -173,38 +177,40 @@ from 1 to the entered number, inclusive
 Then log that product
 
 Code
+
+function prompt(msg) {
+  console.log(`=> ${msg}`);
+}
+
+let sum = 0;
+let product = 1;
+
+prompt("Please enter an integer greater than 0:\n");
+let integer = Number(readline.question());
+
+prompt("Enter 's' to compute the sum, or 'p' to compute the product:\n");
+let letter = readline.question();
+
+if (letter.toLowerCase() === "s") {
+  for (let i = 1; i <= integer; i++) {
+    sum += i;
+  }
+  console.log(`The sum of the integers between 1 and ${integer} is ${sum}.`);
+} else if (letter.toLowerCase() === "p") {
+  for (let i = 1; i <= integer; i++) {
+    product *= i;
+  }
+  console.log(
+    `The product of the integers between 1 and ${integer} is ${product}.`
+  );
+}
+
+input: 3, s; // return 6
+input: 8, p; // return 40320
+input: 10, s; // return 55
+input: 5, p; // return 120
+
 */
-// function prompt(msg) {
-//   console.log(`=> ${msg}`);
-// }
-
-// let sum = 0;
-// let product = 1;
-
-// prompt("Please enter an integer greater than 0:\n");
-// let integer = Number(readline.question());
-
-// prompt("Enter 's' to compute the sum, or 'p' to compute the product:\n");
-// let letter = readline.question();
-
-// if (letter.toLowerCase() === "s") {
-//   for (let i = 1; i <= integer; i++) {
-//     sum += i;
-//   }
-//   console.log(`The sum of the integers between 1 and ${integer} is ${sum}.`);
-// } else if (letter.toLowerCase() === "p") {
-//   for (let i = 1; i <= integer; i++) {
-//     product *= i;
-//   }
-//   console.log(
-//     `The product of the integers between 1 and ${integer} is ${product}.`
-//   );
-// }
-
-// input: 3, s  // return 6
-// input: 8, p // return 40320
-// input: 10, s // return 55
-// input: 5, p // return 120
 
 /*
 7. Write a function that takes two 

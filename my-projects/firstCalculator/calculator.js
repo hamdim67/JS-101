@@ -109,8 +109,6 @@ let proceed;
 do {
   console.clear();
   lang = getLanguage();
-  //How can I declare 'lang' with let inside the loop and
-  //it be accessible outside the do/while loop?
 
   prompt(messages("Welcome", lang));
 

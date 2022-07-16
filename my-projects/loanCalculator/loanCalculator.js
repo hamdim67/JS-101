@@ -19,6 +19,7 @@ function getLoanAmount(amount) {
   amount = readline.question();
 
   amount = amount.replaceAll(",", "").replaceAll("$", "");
+  console.log(amount);
 
   invalidAmount(Number(amount));
 
