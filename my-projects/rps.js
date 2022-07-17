@@ -1,9 +1,3 @@
-"use strict";
-//Problem breakdown
-//Ask the user for their move
-//The computer will choose their move
-//Display who won/the result
-
 const readline = require("readline-sync");
 const VALID_CHOICES = [
   "r",
@@ -18,19 +12,9 @@ const VALID_CHOICES = [
   "spock",
 ];
 
-let choice;
-
 function prompt(msg) {
   console.log(`=> ${msg}`);
 }
-
-//Rock beats scissors or lizard
-//Paper beats rock or spock
-//Scissors beats paper or lizard
-//Lizard beats spock or paper
-//Spock beats scissors or rock
-
-//want user to be able to enter "r" or "rock" for rock
 
 function getValidChoice(decision) {
   if (decision === ("r" || "rock")) {
@@ -73,11 +57,11 @@ function opponent(choice, computerChoice) {
 
 function displayWinner(userChoice, opponent) {
   if (userChoice) {
-    console.log(userChoice);
+    return userChoice;
   } else if (opponent) {
-    console.log(opponent);
+    return opponent;
   } else {
-    console.log("It's a tie...");
+    return "It's a tie...";
   }
 }
 
@@ -97,11 +81,11 @@ let answer;
 do {
   console.clear();
   prompt(`"Choose one: ${VALID_CHOICES.join(", ")}."`);
-  choice = readline.question();
+  let choice = readline.question();
 
   choice = getValidChoice(choice);
 
-  while (!VALID_CHOICES.flat().includes(choice)) {
+  while (!VALID_CHOICES.includes(choice)) {
     prompt("That's not a valid choice");
     choice = readline.question();
   }
