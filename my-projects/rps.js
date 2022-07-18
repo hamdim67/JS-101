@@ -1,69 +1,54 @@
 const readline = require("readline-sync");
-const VALID_CHOICES = [
-  "r",
-  "rock",
-  "p",
-  "paper",
-  "s",
-  "scissors",
-  "l",
-  "lizard",
-  "sp",
-  "spock",
-];
+const VALID_CHOICES = {
+  rock: ["r", "rock"],
+  paper: ["p", "paper"],
+  scissors: ["sc", "scissors"],
+  lizard: ["l", "lizard"],
+  spock: ["sp", "spock"],
+};
+
+const WINNING_COMBOS = {
+  rock: ["scissors", "lizard"],
+  paper: ["rock", "spock"],
+  scissors: ["paper", "lizard"],
+  lizard: ["spock", "paper"],
+  spock: ["scissors", "rock"],
+};
+
+let round = 0;
+let playerScore = 0;
+let computerScore = 0;
 
 function prompt(msg) {
   console.log(`=> ${msg}`);
 }
 
-function getValidChoice(decision) {
-  if (decision === ("r" || "rock")) {
-    decision = "rock";
-  } else if (decision === ("p" || "paper")) {
-    decision = "paper";
-  } else if (decision === ("s" || "scissors")) {
-    decision = "scissors";
-  } else if (decision === ("l" || "lizard")) {
-    decision = "lizard";
-  } else if (decision === ("sp" || "spock")) {
-    decision = "spock";
-  }
-  return decision;
+function userWins(choice, computerChoice) {
+  return WINNING_COMBOS[choice].includes(computerChoice);
 }
 
-function userChoice(choice, computerChoice) {
-  if (
-    (choice === "rock" && computerChoice === ("scissors" || "lizard")) ||
-    (choice === "paper" && computerChoice === ("rock" || "spock")) ||
-    (choice === "scissors" && computerChoice === ("paper" || "lizard")) ||
-    (choice === "lizard" && computerChoice === ("spock" || "paper")) ||
-    (choice === "spock" && computerChoice === ("scissors" || "rock"))
-  ) {
-    console.log("You win!");
-  }
-}
-
-function opponent(choice, computerChoice) {
-  if (
-    (choice === ("scissors" || "lizard") && computerChoice === "rock") ||
-    (choice === ("rock" || "spock") && computerChoice === "paper") ||
-    (choice === ("paper" || "lizard") && computerChoice === "scissors") ||
-    (choice === ("spock" || "paper") && computerChoice === "lizard") ||
-    (choice === ("rock" || "scissors") && computerChoice === "spock")
-  ) {
-    console.log("Computer wins :(");
-  }
-}
-
-function displayWinner(userChoice, opponent) {
-  if (userChoice) {
-    return userChoice;
-  } else if (opponent) {
-    return opponent;
+function scoreTally(choice, computerChoice) {
+  if (userWins(choice, computerChoice)) {
+    playerScore += 1;
+    round += 1;
   } else {
-    return "It's a tie...";
+    computerScore += 1;
+    round += 1;
+  }
+  return [playerScore, computerScore, round];
+}
+
+function displayWinner(choice, computerChoice) {
+  if (userWins(choice, computerChoice)) {
+    prompt("You win!");
+  } else if (choice === computerChoice) {
+    prompt("It's a tie...");
+  } else {
+    prompt("Computer wins :(");
   }
 }
+
+let answer;
 
 function runAgain(answer) {
   prompt("Do you want to play another game?");
@@ -76,31 +61,45 @@ function runAgain(answer) {
   return answer;
 }
 
-let answer;
+for (let counter = 0; counter <= round; counter++) {
+  gameRound: do {
+    console.clear();
 
-do {
-  console.clear();
-  prompt(`"Choose one: ${VALID_CHOICES.join(", ")}."`);
-  let choice = readline.question();
+    prompt(`"Choose one: ${Object.values(VALID_CHOICES).join(", ")}."`);
+    let choice = readline.question();
 
-  choice = getValidChoice(choice);
+    while (!Object.keys(VALID_CHOICES)) {
+      prompt("That's not a valid choice");
+      choice = readline.question();
+    }
 
-  while (!VALID_CHOICES.includes(choice)) {
-    prompt("That's not a valid choice");
-    choice = readline.question();
-  }
+    let randomIndex = Math.floor(
+      Math.random() * Object.keys(VALID_CHOICES).length
+    );
 
-  let randomIndex = Math.floor(Math.random() * VALID_CHOICES.length);
-  let computerChoice = VALID_CHOICES[randomIndex];
+    let computerChoice = Object.keys(VALID_CHOICES)[randomIndex];
 
-  computerChoice = getValidChoice(computerChoice);
+    prompt(`You chose ${choice}. Computer chose ${computerChoice}.`);
 
-  prompt(`You chose ${choice}. Computer chose ${computerChoice}.`);
+    displayWinner(choice, computerChoice);
 
-  displayWinner(
-    userChoice(choice, computerChoice),
-    opponent(choice, computerChoice)
-  );
+    [playerScore, computerScore, round] = scoreTally(choice, computerChoice);
+    console.log(`Player's Score: ${playerScore}`);
+    console.log(`Computer's Score: ${computerScore}`);
+    console.log(`Round: ${round}`);
 
-  answer = runAgain();
-} while (answer === "yes" || answer === "y");
+    if (playerScore === 3) {
+      prompt("You are the Grand Winner!");
+      round = 0;
+      break gameRound;
+    } else if (computerScore === 3) {
+      prompt("Computer is Grand Winner :(");
+      round = 0;
+      break gameRound;
+    }
+
+    answer = runAgain(answer);
+  } while (answer === "yes" || answer === "y");
+
+  if (round === 0) break;
+}
