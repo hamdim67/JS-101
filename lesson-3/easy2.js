@@ -63,7 +63,7 @@ console.log(newNumber);
 */
 
 /*Q3
-Given a number and an arrya, determine whether the number is included in the array
+Given a number and an array, determine whether the number is included in the array
 */
 
 // let numbers = [1, 2, 3, 4, 5, 15, 16, 17, 95, 96, 99];
@@ -94,7 +94,7 @@ Given an array of numbers [1, 2, 3, 4, 5], mutate the array by removing the numb
 
 // let numbers = [1, 2, 3, 4, 5];
 // numbers.splice(2, 1);
-// //splice mutates the original array, so
+// //splice mutates the original array, so it removes element at index '2' and deletes '1' element
 // console.log(numbers);
 
 /*Q6
@@ -126,13 +126,66 @@ let flintstones = {
 // barney[1] = flintstones.Barney;
 // console.log(barney);
 
-console.log(
-  Object.entries(flintstones)
-    .filter((pair) => pair[0] === "Barney")
-    .shift()
-);
+// console.log(
+//   Object.entries(flintstones)
+//     .filter((pair) => pair[0] === "Barney")
+//     .shift()
+// );
+
 /*
 This solution gets an array of key-value pairs
 and then filters them (remember, filter returns an array of values)
 filter() takes each pair, and if pair[0] === 'Barney', it removes that pair from the filter array
+*/
+
+/*Q8
+How would you check whether the objects assigned to variables numbers and table below are arrays?
+
+
+let numbers = [1, 2, 3, 4]; // true
+let table = { field1: 1, field2: 2, field3: 3, field4: 4 }; // false
+
+console.log(Array.isArray(numbers));
+console.log(Array.isArray(table));
+*/
+
+/*Q9
+Back in the stone age (before CSS), we used spaces to align things on the screen. If we have a 40-character wide table of Flintstone family members, how can we center the following title above the table with spaces?
+
+let title = "Flintstone Family Members";
+
+let padding = Math.floor((40 - title.length) / 2);
+
+console.log(title.padStart(padding + title.length));
+
+*/
+
+/*Q10 
+Write a one-line expression to count the number of lower-case t characters in each of the following strings:
+*/
+
+let statement1 = "The Flintstones Rock!";
+let statement2 = "Easy come, easy go.";
+console.log(statement1.length);
+console.log(statement2.length);
+
+/* My solution (NOT one liner :( ))
+let getCount = (str, char) => {
+  let count = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === char) {
+      count += 1;
+    }
+  }
+  return count;
+};
+
+console.log(getCount(statement1, "t"));
+console.log(getCount(statement2, "t"));
+*/
+
+/* LS solution
+ 
+statement1.split("").filter((char) => char === "t").length;
+statement2.split("").filter((char) => char === "t").length;
 */
